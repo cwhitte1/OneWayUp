@@ -27,6 +27,10 @@ public class ObjectInteraction : MonoBehaviour {
                 GetComponent<Collider>().enabled = false;
                 GetComponent<Rigidbody>().useGravity = true;
                 GetComponent<Rigidbody>().AddForce(new Vector3(0f,100f,-100f));
+
+                Behaviour halo = (Behaviour)GetComponent("Halo");
+                halo.enabled = false;
+
             }
         }
         //Debug.Log(timer);
