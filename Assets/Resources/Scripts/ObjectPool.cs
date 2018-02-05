@@ -16,7 +16,7 @@ public class ObjectPool : MonoBehaviour {
             //Vector3 pos = RandomCircle(center, rad);
             float xcor = rad * Mathf.Cos(x * (360 / numberCubes));
             float ycor = rad * Mathf.Sin(x * (360 / numberCubes));
-            Vector3 pos = new Vector3(xcor, 0f, ycor);
+            Vector3 pos = new Vector3(xcor, (x * 8f + 8), ycor);
             Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
             Instantiate(cube, pos, rot);
         }

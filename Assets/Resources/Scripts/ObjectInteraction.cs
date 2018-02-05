@@ -30,8 +30,7 @@ public class ObjectInteraction : MonoBehaviour {
 
                 Behaviour halo = (Behaviour)GetComponent("Halo");
                 halo.enabled = false;
-
-            }
+            } 
         }
         //Debug.Log(timer);
 		
