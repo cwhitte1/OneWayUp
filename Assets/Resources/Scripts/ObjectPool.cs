@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour {
+public class ObjectPool : MonoBehaviour { // this isn't functioning as an object pool anymore, more as object spawning script for now
 
     public Transform cube;
     public GameObject[] cubes;

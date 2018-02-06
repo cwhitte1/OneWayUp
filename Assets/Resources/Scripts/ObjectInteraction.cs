@@ -11,9 +11,12 @@ public class ObjectInteraction : MonoBehaviour {
 
     private bool gazedAt;
 
+    private PlayerMovement numShot;
+
 	// Use this for initialization
 	void Start () {
-		
+        GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
+        numShot = player.GetComponent<PlayerMovement>();
 	}
 	
 	// Update is called once per frame
@@ -27,7 +30,7 @@ public class ObjectInteraction : MonoBehaviour {
                 GetComponent<Collider>().enabled = false;
                 GetComponent<Rigidbody>().useGravity = true;
                 GetComponent<Rigidbody>().AddForce(new Vector3(0f,100f,-100f));
-
+                numShot.numberShot += 1;
                 Behaviour halo = (Behaviour)GetComponent("Halo");
                 halo.enabled = false;
             } 
