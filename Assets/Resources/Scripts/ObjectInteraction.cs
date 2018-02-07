@@ -11,7 +11,8 @@ public class ObjectInteraction : MonoBehaviour {
 
     private bool gazedAt;
 
-    private PlayerMovement numShot;
+    //public GameObject player;
+    public PlayerMovement numShot;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +31,8 @@ public class ObjectInteraction : MonoBehaviour {
                 GetComponent<Collider>().enabled = false;
                 GetComponent<Rigidbody>().useGravity = true;
                 GetComponent<Rigidbody>().AddForce(new Vector3(0f,100f,-100f));
-                numShot.numberShot += 1;
+                numShot.IncrementScore();
+                Debug.Log("HIT");
                 Behaviour halo = (Behaviour)GetComponent("Halo");
                 halo.enabled = false;
             } 

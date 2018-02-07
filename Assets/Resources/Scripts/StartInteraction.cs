@@ -28,6 +28,7 @@ public class StartInteraction : MonoBehaviour
         if (gazedAt)
         {
             timer += Time.deltaTime;
+            //Debug.Log("Working");
 
             if (timer >= gazeTime)
             {

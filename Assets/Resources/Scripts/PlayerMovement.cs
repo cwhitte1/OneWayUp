@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -10,9 +11,15 @@ public class PlayerMovement : MonoBehaviour {
 
     public float numberShot;
 
+    Text numShotText;
+    Text scoreText;
+
 	// Use this for initialization
 	void Start () {
-        numberShot = 1;
+        numberShot = 1; // start at one for logic right now
+
+        numShotText = GameObject.FindGameObjectWithTag("HitsInt").GetComponent<Text>();
+        scoreText = GameObject.FindGameObjectWithTag("ScoreFloat").GetComponent<Text>();
 	}
 	
 	// Update is called once per frame
@@ -21,17 +28,31 @@ public class PlayerMovement : MonoBehaviour {
         {
             transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
 
+            /*
             if ((transform.position.y/10f)>numberShot)
             {
                 GetComponent<Rigidbody>().useGravity = true;
             } else {
                 GetComponent<Rigidbody>().useGravity = false;
+                //transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
             }
+            */
 
             if (score < transform.position.y)
             {
                 score = transform.position.y;
             }
         }
+
+        numShotText.text = (numberShot-1).ToString();
+        scoreText.text = score.ToString();
+
+
+        //Debug.Log(numberShot - 1);
 	}
+
+    public void IncrementScore(){
+        numberShot += 1;
+        //Debug.Log("increment called");
+    }
 }
