@@ -26,9 +26,13 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (gameStarted)
         {
-            if(numberShot < 8)
-            transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
-            else GetComponent<Rigidbody>().useGravity = true;
+            if (numberShot < 3)
+                transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
+            else
+            {
+                GetComponent<Rigidbody>().isKinematic = false;
+                GetComponent<Rigidbody>().useGravity = true;
+            }
 
             /*
             if ((transform.position.y/10f)>numberShot)
@@ -43,6 +47,16 @@ public class PlayerMovement : MonoBehaviour {
             if (score < transform.position.y)
             {
                 score = transform.position.y;
+            }
+
+            if(GetComponent<Rigidbody>().transform.position.y < -10f){
+                Debug.Log("TOO LOW");
+                gameStarted = false;
+                numberShot = 1;
+                score = 0f;
+                GetComponent<Rigidbody>().transform.position = new Vector3(0f,0f,0f);
+                GetComponent<Rigidbody>().isKinematic = true;
+                GetComponent<Rigidbody>().useGravity = false;
             }
         }
 
