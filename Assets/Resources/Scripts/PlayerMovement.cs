@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        numberShot = 1; // start at one for logic right now
+        numberShot = 0;
 
         numShotText = GameObject.FindGameObjectWithTag("HitsInt").GetComponent<Text>();
         scoreText = GameObject.FindGameObjectWithTag("ScoreFloat").GetComponent<Text>();
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (gameStarted)
         {
-            if (numberShot < 3)
+            if (numberShot < 10)
                 transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
             else
             {
@@ -34,37 +35,26 @@ public class PlayerMovement : MonoBehaviour {
                 GetComponent<Rigidbody>().useGravity = true;
             }
 
-            /*
-            if ((transform.position.y/10f)>numberShot)
-            {
-                GetComponent<Rigidbody>().useGravity = true;
-            } else {
-                GetComponent<Rigidbody>().useGravity = false;
-                //transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
-            }
-            */
-
             if (score < transform.position.y)
             {
                 score = transform.position.y;
             }
 
             if(GetComponent<Rigidbody>().transform.position.y < -10f){
-                Debug.Log("TOO LOW");
+                SceneManager.LoadScene("MainScene");
+                /*
                 gameStarted = false;
-                numberShot = 1;
+                numberShot = 0;
                 score = 0f;
                 GetComponent<Rigidbody>().transform.position = new Vector3(0f,0f,0f);
                 GetComponent<Rigidbody>().isKinematic = true;
                 GetComponent<Rigidbody>().useGravity = false;
+                */
             }
         }
 
-        numShotText.text = (numberShot-1).ToString();
+        numShotText.text = (numberShot).ToString();
         scoreText.text = score.ToString();
-
-
-        //Debug.Log(numberShot - 1);
 	}
 
     public void IncrementScore(){
