@@ -26,7 +26,9 @@ public class PlayerMovement : MonoBehaviour {
 	void Update () {
         if (gameStarted)
         {
+            if(numberShot < 8)
             transform.position = new Vector3(0f, transform.position.y + speed * Time.deltaTime, 0f);
+            else GetComponent<Rigidbody>().useGravity = true;
 
             /*
             if ((transform.position.y/10f)>numberShot)

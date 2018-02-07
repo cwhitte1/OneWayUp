@@ -15,13 +15,23 @@ public class RingGenerator : MonoBehaviour {
     MeshFilter ringMF;
     MeshRenderer ringMR;
 
-	// Use this for initialization
-	void Start () {
+    public int numberRings = 8;
+    public float spaceBetweenRings = 8f;
+
+    void Start(){
+
+        for (int i = 0; i < numberRings; i++){
+            ConstructRing(i * spaceBetweenRings);
+        }
+        
+    }
+	
+	void ConstructRing(float height) {
 
         ring = new GameObject(name + "Ring");
         ring.transform.parent = transform;
         ring.transform.localScale = Vector3.one;
-        ring.transform.localPosition = Vector3.zero;
+        ring.transform.localPosition = new Vector3(0f, height, 0f); //Vector3.zero; // change y here
         ring.transform.localRotation = Quaternion.identity;
         ringMF = ring.AddComponent<MeshFilter>();
         ringMesh = ringMF.mesh;
