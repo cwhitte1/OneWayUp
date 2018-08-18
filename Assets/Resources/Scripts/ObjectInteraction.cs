@@ -14,10 +14,17 @@ public class ObjectInteraction : MonoBehaviour {
     //public GameObject player;
     public PlayerMovement numShot;
 
+    GameObject cubeLimit; // vv
+    Collider cubeCollider;  // vv
+
 	// Use this for initialization
 	void Start () {
         GameObject player = GameObject.FindGameObjectWithTag("PlayerParent");
         numShot = player.GetComponent<PlayerMovement>();
+
+        cubeLimit = GameObject.FindGameObjectWithTag("CubeLimit");
+        cubeCollider = cubeLimit.GetComponent<Collider>();
+
 	}
 	
 	// Update is called once per frame
@@ -32,12 +39,23 @@ public class ObjectInteraction : MonoBehaviour {
                 GetComponent<Rigidbody>().useGravity = true;
                 GetComponent<Rigidbody>().AddForce(new Vector3(0f,100f,-100f));
                 numShot.IncrementScore();
-                Debug.Log("HIT");
+                //Debug.Log("HIT");
                 Behaviour halo = (Behaviour)GetComponent("Halo");
                 halo.enabled = false;
             } 
         }
         //Debug.Log(timer);
+        GameObject temp = this.gameObject;
+        Collider tempCollider = temp.GetComponent<Collider>();
+        if(tempCollider.bounds.Intersects(cubeCollider.bounds)){
+            Debug.LogWarning("Bounds intersecting");
+            GetComponent<Collider>().enabled = false;
+            GetComponent<Rigidbody>().useGravity = true; //force gravity fall
+            GetComponent<Rigidbody>().AddForce(new Vector3(0f, 1f, -1f));
+            Behaviour halo = (Behaviour)GetComponent("Halo");
+            halo.enabled = false;
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().misses += 1;
+        }
 		
 	}
 
